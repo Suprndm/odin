@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Odin</id>
+    <version>1.0.0</version>
+    <authors>NDMCI</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Odin is a 2D Engine based on SkiaSharp</description>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="11.0.2"/>
+      <dependency id="SkiaSharp.Views.Forms" version="1.60.1"/>
+      <dependency id="TouchTracking.Forms" version="1.0.0"/>
+      <dependency id="Xamarin.Forms" version="3.0.0.446417"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Odin\bin\release\netstandard2.0\Odin.dll" target="lib\netstandard2.0" />
+    <file src="Odin\bin\release\netstandard2.0\Odin.pdb" target="lib\netstandard2.0" />
+    <file src="Odin\bin\release\netstandard2.0\Odin.xml" target="lib\netstandard2.0" />
+  </files>
+</package>
