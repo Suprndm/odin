@@ -4,7 +4,7 @@ namespace Odin.Containers
 {
     public abstract class ContainerBase:OView
     {
-        protected ContainerBase(float x, float y, float height, float width) : base(x, y, height, width)
+        protected ContainerBase(float x, float y, float width, float height) : base(x, y, width, width)
         {
             
         }

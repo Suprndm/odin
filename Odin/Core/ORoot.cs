@@ -23,7 +23,7 @@ namespace Odin.Core
         private long _lastElapsedTime = 0;
         public bool FpsEnabled { get; set; }
 
-        public virtual async void Initialize(float height, float width)
+        public virtual async void Initialize(float width, float height)
         {
             FpsEnabled = true;
             Width = width;

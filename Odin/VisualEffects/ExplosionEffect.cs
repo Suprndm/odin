@@ -8,7 +8,7 @@ namespace Odin.VisualEffects
         private readonly float G;
         private readonly float F;
         private readonly float K;
-        public ExplosionEffect( float x, float y, float height, float width, float nbParticules, float f, float k) : base( x, y, height, width)
+        public ExplosionEffect( float x, float y, float width, float height, float nbParticules, float f, float k) : base( x, y, height, width)
         {
             G = 0;
             F = f;

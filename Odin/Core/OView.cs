@@ -398,7 +398,7 @@ namespace Odin.Core
         }
 
 
-        protected OView(float x, float y, float height, float width)
+        protected OView(float x, float y, float width, float height)
         {
             _x = x;
             _y = y;

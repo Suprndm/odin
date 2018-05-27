@@ -77,7 +77,7 @@ namespace Odin
                     var deviceWidth = e.Surface.Canvas.DeviceClipBounds.Width;
                     _isInitializing = true;
                     // Init Odin
-                    _oRoot.Initialize(deviceHeight, deviceWidth);
+                    _oRoot.Initialize(deviceWidth, deviceHeight );
                     _oRoot.SetCanvas(e.Surface.Canvas);
                     _stopwatch = new Stopwatch();
                     _stopwatch.Start();

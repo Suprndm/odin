@@ -37,7 +37,7 @@ namespace Odin.UIElements
             int slideMs = 1000,
             float slideRatio = 0.15f,
             int initialIndex = 0,
-            bool isFullScreen = true) : base(x, y, height, width)
+            bool isFullScreen = true) : base(x, y, width, height) 
         {
             _initialX = x;
             _items = items;

@@ -41,7 +41,7 @@ namespace Odin.UIElements.Buttons
         protected int TransitionMs = 300;
         private SKColor _normalColor;
 
-        public SimpleButton(float x, float y, float width, float height) : base(x, y, height, width)
+        public SimpleButton(float x, float y, float width, float height) : base(x, y, width, height) 
         {
             NormalColor = new SKColor(150, 150, 150);
             IsActivated = true;

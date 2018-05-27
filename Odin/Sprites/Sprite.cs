@@ -11,7 +11,7 @@ namespace Odin.Sprites
 
         public float Angle { get; set; }
 
-        public Sprite(string spriteName, float x, float y, float width, float height, SKPaint paint = null) : base(x, y, height, width)
+        public Sprite(string spriteName, float x, float y, float width, float height, SKPaint paint = null) : base(x, y, width, height) 
         {
             if (paint == null)
             {
