@@ -17,21 +17,21 @@ namespace Odin.Tester
         public override async Task LoadAssets()
         {
             await Task.Delay(100);
-
-             //await SpriteLoader.Instance.Initialize<GameRoot>(
-             //    new List<string>
-             //    {
-             //        SpriteConst.white_block_0,
-             //        SpriteConst.white_block_1,
-             //        SpriteConst.white_block_2,
-             //        SpriteConst.white_block_22,
-             //        SpriteConst.white_block_3,
-             //        SpriteConst.white_block_4,
-             //        SpriteConst.BaseMap,
-             //    },
-             //    "Resources/Graphics",
-             //    ScreenWidth,
-             //    ScreenHeight);
+             
+             await SpriteLoader.Instance.Initialize<GameRoot>(
+                 new List<string>
+                 {
+                     SpriteConst.white_block_0,
+                     SpriteConst.white_block_1,
+                     SpriteConst.white_block_2,
+                     SpriteConst.white_block_22,
+                     SpriteConst.white_block_3,
+                     SpriteConst.white_block_4,
+                     SpriteConst.BaseMap,
+                 },
+                 "Resources/Graphics",
+                 ScreenWidth,
+                 ScreenHeight);
         }
 
         public override void RegisterServices(UnityContainer container)

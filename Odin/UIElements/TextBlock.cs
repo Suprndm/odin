@@ -10,6 +10,7 @@ namespace Odin.UIElements
         public SKColor Color { get; set; }
         private SKRect _hitbox;
         private HorizontalAlignment _horizontalAlignment;
+        private SKPaint _paint;
 
         public TextBlock(float x, float y, string text, float size, SKColor color, HorizontalAlignment horizontalAlignment = HorizontalAlignment.Center) : base(x, y, size, size)
         {
@@ -17,7 +18,18 @@ namespace Odin.UIElements
             Text = text;
             Size = size;
             Color = color;
-        }
+            _paint = new SKPaint();
+
+            _paint.Typeface = SKTypeface.FromFamilyName(
+                    "Arial",
+                    SKFontStyleWeight.Light,
+                    SKFontStyleWidth.Normal,
+                    SKFontStyleSlant.Upright);
+
+            _paint.TextSize = Size;
+            _paint.IsAntialias = true;
+            _paint.Color = CreateColor(Color);
+            }
 
         public override void Render()
         {
@@ -25,33 +37,21 @@ namespace Odin.UIElements
             if (string.IsNullOrEmpty(Text))
                 return;
 
-            using (var paint = new SKPaint())
-            {
-                paint.Typeface = SKTypeface.FromFamilyName(
-                    "Arial",
-                    SKFontStyleWeight.Light,
-                    SKFontStyleWidth.Normal,
-                    SKFontStyleSlant.Upright);
+            _paint.Color = CreateColor(Color);
 
-                paint.TextSize = Size;
-                paint.IsAntialias = true;
-                paint.Color = CreateColor(Color);
+            var textLenght = _paint.MeasureText(Text);
 
-                var textLenght = paint.MeasureText(Text);
+            Width = textLenght;
 
-                Width = textLenght;
+            float xModifier = 0;
 
-                float xModifier = 0;
+            if (_horizontalAlignment == HorizontalAlignment.Center)
+                xModifier = -textLenght / 2;
+            else if (_horizontalAlignment == HorizontalAlignment.Left)
+                xModifier = -textLenght;
 
-                if (_horizontalAlignment == HorizontalAlignment.Center)
-                    xModifier = -textLenght / 2;
-                else if (_horizontalAlignment == HorizontalAlignment.Left)
-                    xModifier = -textLenght;
-
-                _hitbox = SKRect.Create(X + xModifier, Y - Size / 3, Width, Size);
-                Canvas.DrawText(Text, X + xModifier, Y + Size / 2, paint);
-
-            }
+            _hitbox = SKRect.Create(X + xModifier, Y - Size / 3, Width, Size);
+            Canvas.DrawText(Text, X + xModifier, Y + Size / 2, _paint);
         }
 
         public override SKRect GetHitbox()
