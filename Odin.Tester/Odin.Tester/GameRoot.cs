@@ -39,6 +39,14 @@ namespace Odin.Tester
 
         }
 
+        public override void Render()
+        {
+            GameServiceLocator.Instance.Get<Logger>().UpdatePermanentText1("Test 1");
+            GameServiceLocator.Instance.Get<Logger>().UpdatePermanentText2("Test 2");
+            GameServiceLocator.Instance.Get<Logger>().UpdatePermanentText3("Test 3");
+            base.Render();
+        }
+
         public override OdinSettings BuildSettings()
         {
             return new OdinSettings(true);

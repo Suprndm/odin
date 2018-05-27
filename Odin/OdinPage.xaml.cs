@@ -61,12 +61,12 @@ namespace Odin
 
                 }
 
-                if (_stopwatch.ElapsedMilliseconds - _lastElapsedTime > 0)
+                var dt = _stopwatch.ElapsedMilliseconds - _lastElapsedTime;
+                if (dt < 16)
                 {
-                    var fps = 1000 / (_stopwatch.ElapsedMilliseconds - _lastElapsedTime);
-                    _lastElapsedTime = _stopwatch.ElapsedMilliseconds;
-
+                    Task.Delay((int) (16 - dt)).Wait();
                 }
+                _lastElapsedTime = _stopwatch.ElapsedMilliseconds;
 
             }
             else if (!_isInitializing)
