@@ -35,7 +35,7 @@ namespace Odin.Data
         private void Initialize()
         {
             var className = typeof(T).Name;
-            string jsonString = ResourceLoader.LoadStringAsync($"Data/{className}/{className}.json").Result;
+            string jsonString = ResourceLoader<T>.LoadStringAsync($"Data/{className}/{className}.json").Result;
             Data = JsonConvert.DeserializeObject<List<T>>(jsonString);
         }
     }

@@ -28,7 +28,7 @@ namespace Odin.Sprites
             }
         }
 
-        public async Task Initialize(IList<string> spritesNames, string resourceFolder, float screenWidth, float screenHeight)
+        public async Task Initialize<T>(IList<string> spritesNames, string resourceFolder, float screenWidth, float screenHeight)
         {
             _spriteDatas = new Dictionary<string, SpriteData>();
             var resolutionLevel = GetResolutionLevel(screenWidth, screenHeight);
@@ -36,7 +36,7 @@ namespace Odin.Sprites
             foreach (var spritesName in spritesNames)
             {
                 var sheetPath = $"{resourceFolder}/{resolutionLevel}/{spritesName}";
-                var bitmap = await ResourceLoader.LoadBitmapAsync(sheetPath);
+                var bitmap = await ResourceLoader<T>.LoadBitmapAsync(sheetPath);
                 var info = bitmap?.Info ?? SKImageInfo.Empty;
                 if (bitmap == null || info.Width == 0 || info.Height == 0)
                 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Odin.Core;
 using SkiaSharp;
 using TouchTracking;
@@ -12,6 +13,7 @@ namespace Odin
     public partial class OdinPage : ContentPage
     {
         private bool _isInitiated;
+        private bool _isInitializing;
         private ORoot _oRoot;
         private Stopwatch _stopwatch;
         private long _lastElapsedTime = 0;
@@ -45,7 +47,7 @@ namespace Odin
         }
 
 
-        private async void SKGLView_PaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs e)
+        private void SKGLView_PaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs e)
         {
             if (_isInitiated)
             {
@@ -67,15 +69,26 @@ namespace Odin
                 }
 
             }
-            else
+            else if (!_isInitializing)
             {
-                // Init Odin
-                await _oRoot.Initialize(e.Surface.Canvas.DeviceClipBounds.Height, e.Surface.Canvas.DeviceClipBounds.Width);
-
-                _oRoot.SetCanvas(e.Surface.Canvas);
-                _isInitiated = true;
-                _stopwatch = new Stopwatch();
-                _stopwatch.Start();
+                try
+                {
+                    var deviceHeight = e.Surface.Canvas.DeviceClipBounds.Height;
+                    var deviceWidth = e.Surface.Canvas.DeviceClipBounds.Width;
+                    _isInitializing = true;
+                    // Init Odin
+                    _oRoot.Initialize(deviceHeight, deviceWidth);
+                    _oRoot.SetCanvas(e.Surface.Canvas);
+                    _stopwatch = new Stopwatch();
+                    _stopwatch.Start();
+                    _isInitiated = true;
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                    throw;
+                }
+                
             }
         }
 

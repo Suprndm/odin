@@ -7,14 +7,14 @@ using SkiaSharp;
 
 namespace Odin.Assets
 {
-    public static class ResourceLoader
+    public static class ResourceLoader<T>
     {
         private static readonly Assembly assembly;
         private static readonly string[] resources;
 
         static ResourceLoader()
         {
-            var type = typeof(ResourceLoader);
+            var type = typeof(T);
             assembly = type.GetTypeInfo().Assembly;
             resources = assembly.GetManifestResourceNames();
         }
