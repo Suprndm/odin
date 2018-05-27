@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Odin.Core;
 using Odin.Paint;
+using Odin.Services;
 using Odin.Shapes;
 using SkiaSharp;
+using Unity;
 
 namespace Odin.Tester
 {
@@ -14,12 +16,36 @@ namespace Odin.Tester
             return Task.CompletedTask;
         }
 
+        public override void RegisterServices(UnityContainer container)
+        {
+
+        }
+
+        public override OdinSettings BuildSettings()
+        {
+            return new OdinSettings(true);
+        }
+
         protected override void OnInitialized()
         {
             _paintStorage = new PaintStorage();
-            _paintStorage.DeclarePaint("red", new SKPaint() { Color = new SKColor(255, 0, 0) });
+            _paintStorage.DeclarePaint("gray", new SKPaint() { Color = new SKColor(125, 125, 125) });
 
-            AddChild(new Rectangle(100, 100, 100, 100, _paintStorage.GetPaint("red")));
+            var rectangle = new Rectangle(100, 100, 500, 500, _paintStorage.GetPaint("gray"));
+
+            rectangle.DeclareTappable(rectangle);
+            rectangle.Down += () =>
+            {
+                GameServiceLocator.Instance.Get<Logger>().Log("Rectangle tapped");
+            };
+
+            AddChild(rectangle);
+
+            Task.Run(() =>
+            {
+                Task.Delay(2000).Wait();
+                GameServiceLocator.Instance.Get<Logger>().Log("Game started !");
+            });
         }
     }
 }

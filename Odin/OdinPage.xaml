@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              xmlns:forms1="clr-namespace:TouchTracking.Forms;assembly=TouchTracking.Forms"
-             xmlns:logging="clr-namespace:Odin.Logging;assembly=Odin"
+             xmlns:odin="clr-namespace:Odin;assembly=Odin"
              x:Class="Odin.OdinPage">
     <ContentPage.Content>
         <Grid RowSpacing ="1" BackgroundColor="Black">
@@ -16,6 +16,7 @@
 
             </forms:SKGLView>
             <AbsoluteLayout x:Name="Layout" Grid.Row="0" Grid.RowSpan="3" VerticalOptions="FillAndExpand">
+                <odin:LogView x:Name="LoggingView"></odin:LogView>
                 <AbsoluteLayout.Effects>
                     <forms1:TouchEffect Capture="True"
                                         TouchAction="OnTouchEffectAction" />

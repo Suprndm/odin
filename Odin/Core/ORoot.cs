@@ -1,16 +1,22 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Odin.Gesture;
+using Odin.Services;
 using Odin.UIElements;
+using Unity;
 using Xamarin.Forms;
 
 namespace Odin.Core
 {
     public abstract class ORoot : OView
     {
+        public event Action ServicesRegistered;
+
         public static float ScreenHeight { get; private set; }
         public static float ScreenWidth { get; private set; }
+        private Logger _logger;
 
         private TextBlock _fpsText;
         private Stopwatch _stopwatch;
@@ -25,17 +31,41 @@ namespace Odin.Core
             ScreenHeight = Height;
             ScreenWidth = Width;
 
+            var container = RegisterOdinServices();
+            RegisterServices(container);
+            ServicesRegistered?.Invoke();
+            _logger = GameServiceLocator.Instance.Get<Logger>();
+            _logger.Log("Services registered");
             await LoadAssets();
+            _logger.Log("Assets Loaded");
+
             SetupLayers();
+            _logger.Log("Layers set up");
             OnInitialized();
+            _logger.Log("Game initialized");
             Navigate();
+            _logger.Log("Navigation done");
             SetupGesture();
+            _logger.Log("Gesture Setup");
 
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
+
         }
 
         public abstract Task LoadAssets();
+        public abstract void RegisterServices(UnityContainer container);
+        public abstract OdinSettings BuildSettings();
+
+        private UnityContainer RegisterOdinServices()
+        {
+            var container = new UnityContainer();
+            GameServiceLocator.Instance.Setup(container); 
+            var settings = BuildSettings();
+            container.RegisterInstance(new Logger(settings.LogEnabled));
+
+            return container;
+        }
 
         private void SetupGesture()
         {

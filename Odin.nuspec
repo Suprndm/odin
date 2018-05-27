@@ -11,6 +11,8 @@
       <dependency id="SkiaSharp.Views.Forms" version="1.60.1"/>
       <dependency id="TouchTracking.Forms" version="1.0.0"/>
       <dependency id="Xamarin.Forms" version="3.0.0.446417"/>
+      <dependency id="Unity" version="5.8.6"/>
+      <dependency id="Xam.Plugin.SimpleAudioPlayer" version="1.2.1.1-beta"/>
     </dependencies>
   </metadata>
   <files>

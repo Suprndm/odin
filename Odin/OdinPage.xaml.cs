@@ -27,6 +27,11 @@ namespace Odin
         {
             SKGLView.PaintSurface += SKGLView_PaintSurface;
             _oRoot = new T();
+            _oRoot.ServicesRegistered += () =>
+            {
+                // Setup xaml dependant Stuff
+                LoggingView.Setup();
+            };
         }
 
         public void OnSleep()
@@ -66,6 +71,7 @@ namespace Odin
             {
                 // Init Odin
                 await _oRoot.Initialize(e.Surface.Canvas.DeviceClipBounds.Height, e.Surface.Canvas.DeviceClipBounds.Width);
+
                 _oRoot.SetCanvas(e.Surface.Canvas);
                 _isInitiated = true;
                 _stopwatch = new Stopwatch();
