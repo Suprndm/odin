@@ -16,6 +16,12 @@ namespace Odin.Core
 
         public static float ScreenHeight { get; private set; }
         public static float ScreenWidth { get; private set; }
+
+        /// <summary>
+        /// U is a unit of lenght measurement
+        /// 1 U equals ScreenHeight / 100
+        /// </summary>
+        public static float U { get; private set; }
         private Logger _logger;
 
         private TextBlock _fpsText;
@@ -30,7 +36,7 @@ namespace Odin.Core
             Height = height;
             ScreenHeight = Height;
             ScreenWidth = Width;
-
+            U = Height / 100;
             var container = RegisterOdinServices();
             RegisterServices(container);
             ServicesRegistered?.Invoke();
