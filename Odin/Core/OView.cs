@@ -394,6 +394,8 @@ namespace Odin.Core
             Height = ORoot.ScreenHeight;
             Width = ORoot.ScreenWidth;
 
+            var loader = ORoot.ScreenUnit;
+
             Initialize();
         }
 
