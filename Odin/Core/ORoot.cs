@@ -21,7 +21,7 @@ namespace Odin.Core
         /// ScreenUnit is a unit of lenght measurement
         /// 1 ScreenUnit equals ScreenHeight / 100
         /// </summary>
-        public static float ScreenUnit { get; private set; }
+        public static int ScreenUnit { get; private set; }
 
         private Logger _logger;
 
@@ -37,7 +37,7 @@ namespace Odin.Core
             Height = height;
             ScreenHeight = Height;
             ScreenWidth = Width;
-            ScreenUnit = Height / 100;
+            ScreenUnit = (int)Height / 100;
             var container = RegisterOdinServices();
             RegisterServices(container);
             ServicesRegistered?.Invoke();
