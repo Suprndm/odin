@@ -406,12 +406,13 @@ namespace Odin.Core
             _y = y;
             Height = height;
             Width = width;
-
+            var loader = ORoot.ScreenUnit;
             Initialize();
         }
 
         private void Initialize()
         {
+            var loader = ORoot.ScreenUnit;
             _opacity = 1;
             _visualTreeDepth = 1;
             _isVisible = true;
